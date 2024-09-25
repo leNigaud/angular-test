@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-test';
+  
+  posts: any[] = [];
+
+  constructor(private dataService : DataService ) {}
+
+  ngOnInit() : void {
+    this.dataService.getData().subscribe(
+      (response) => {
+        this.posts = response
+      }
+    )
+  }
+  
 }
